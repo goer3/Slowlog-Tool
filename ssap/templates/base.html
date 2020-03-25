@@ -1,0 +1,59 @@
+{% load staticfiles %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="{% static 'image/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'js/popper.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <title>{% block title %}{% endblock title %} | MYSQL SLOW LOG ANALYTIC PLATFORM，WELCOME!</title>
+</head>
+<body>
+<div id="main">
+    <div id="header">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="{% url 'index' %}" style="font-weight: bolder;">
+                <img src="{% static 'image/mysql.svg' %}" width="30" height="30" class="d-inline-block" alt=""> SLOW LOG
+                PLATFORM
+            </a>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'index' %}">首页</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'mysql_tools:mysql_file_upload_list' %}">上传文件列表</a>
+                    </li>
+                </ul>
+            </div>
+            <a href="{% url 'mysql_tools:mysql_file_upload' %}" class="btn btn-sm btn-danger my-upload-btn">立即上传 SLOW
+                LOG 文件</a>
+        </nav>
+    </div>
+    <div id="content">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div id="main-content">
+                        {% block main-content %}
+                        {% endblock main-content %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="footer">
+        Copyright © 2020 - 2020 Dylan<1214966109@qq.com> <a href="https://www.cnblogs.com/Dy1an/" target="_blank">博客园</a>. All Rights Reserved
+    </div>
+</div>
+{% block footer_js %}
+{% endblock footer_js %}
+</body>
+</html>

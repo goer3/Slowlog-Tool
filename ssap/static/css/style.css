@@ -1,0 +1,292 @@
+* {
+    font-size: 13px;
+    letter-spacing: 1px;
+    border-radius: 0 !important;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    color: white;
+    text-decoration: none;
+}
+
+a:active {
+    text-decoration: none;
+}
+
+#main {
+    min-height: 600px;
+}
+
+#content {
+    margin-bottom: 40px;
+}
+
+.navbar {
+    padding-top: 0;
+    padding-bottom: 0;
+    height: 40px;
+    line-height: 40px;
+    vertical-align: middle;
+}
+
+
+.nav-item a {
+    font-size: 15px;
+    font-weight: 500;
+    color: white;
+    display: block;
+    padding: 0 20px;
+}
+
+.nav-item a:hover {
+    color: white;
+    background-color: #dc3545;
+    font-size: 17px;
+    font-weight: bold;
+    -webkit-transform: skew(-30deg);
+    -moz-transform: skew(-30deg);
+    -o-transform: skew(-30deg);
+    transform: skew(-30deg);
+}
+
+.nav-item a:after {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 5px;
+    background-color: #5FB878;
+    transition: all .2s;
+    -webkit-transition: all .2s;
+}
+
+.my-input-title {
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.my-input-file {
+    padding: .3rem .75rem;
+}
+
+.my-upload-btn {
+    padding: 1px 10px 2px 10px;
+    font-size: 12px;
+}
+
+.form-group {
+    margin-bottom: 2rem;
+}
+
+#uploadForm {
+    width: 500px;
+    position: absolute;
+    top: 100px;
+    left: 50%;
+    margin-left: -250px;
+}
+
+#uploadForm select, input {
+    margin: 10px 0;
+}
+
+.bg-dark {
+    background-color: #1c2b36 !important;
+}
+
+.btn-dark {
+    color: #fff;
+    background-color: #1c2b36;
+    border-color: #1c2b36;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+#footer {
+    position: fixed;
+    bottom: 0;
+    text-align: center;
+    padding: 20px;
+    width: 100%;
+    color: darkgray;
+}
+
+.my-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    border-left: 1px solid #e6e6e6;
+    border-top: 1px solid #e6e6e6;
+
+}
+
+.my-table th, td {
+    border-top: none;
+    border-left: none;
+    position: relative;
+    font-size: 14px;
+    border-right: 1px solid #e6e6e6;
+    border-bottom: 1px solid #e6e6e6;
+    padding: 5px 15px;
+}
+
+.my-table tr:hover {
+    background-color: #ebebeb;
+}
+
+.my-handle-btn {
+    outline: 0;
+    height: 22px;
+    line-height: 22px;
+    padding: 0 10px;
+    font-size: 12px;
+    cursor: pointer;
+    display: inline-block;
+    white-space: nowrap;
+    text-align: center;
+    vertical-align: middle;
+    background-color: #009688;
+    color: #fff !important;
+}
+
+.my-handle-btn-danger {
+    color: #fff !important;
+    background-color: #dc3545 !important;
+}
+
+.my-handle-btn-info {
+    background-color: #FF5722;
+}
+
+.my-table-title {
+    background: #e6e6e6;
+    border: none !important;
+    font-size: 17px !important;
+    color: #1c2b36;
+    padding: 10px 15px !important;
+}
+
+button:focus {
+    outline: 0 !important;
+}
+
+.my-table-title-btn {
+    background: #e6e6e6;
+    border: none !important;
+    font-weight: normal;
+}
+
+.my-table-logo {
+    position: absolute;
+    left: -1px;
+    top: -1px;
+    width: 0;
+    height: 0;
+    border: 10px solid black;
+    border-top-color: gold;
+    border-left-color: gold;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+}
+
+.page-link {
+    color: #1c2b36;
+    font-size: 10px;
+}
+
+.page-item.active .page-link {
+    z-index: 2;
+    color: #fff;
+    background-color: #009688;
+    border-color: #009688;
+}
+
+.my-table .my-table-chose:hover {
+    background-color: white;
+}
+
+.my-table-chose {
+    height: 40px;
+    vertical-align: middle;
+}
+
+.my-table-chose span {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.my-table-select select {
+    font-size: 12px;
+    padding: 2px 5px;
+}
+
+.my-table-select select:focus {
+    outline: none;
+}
+
+.my-table-sort a {
+    display: inline-block;
+    padding: 1px 10px;
+    color: #1c2b36;
+    font-size: 12px;
+}
+
+.my-table-sort a:hover {
+    background-color: #dc3545;
+    color: white;
+}
+
+.my-table-detail {
+    padding: 0;
+}
+
+.my-table-detail td {
+    padding: 0;
+    border-top: 0;
+    border-bottom: 0;
+}
+
+.my-table-detail .card {
+    background-color: #1c2b36;
+    color: white;
+    padding: 15px;
+    border: 0;
+    border-bottom: 1px solid #e6e6e6;
+    font-size: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

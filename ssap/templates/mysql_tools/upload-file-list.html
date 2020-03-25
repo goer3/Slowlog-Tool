@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  上传文件列表
+{% endblock title %}
+
+{% block main-content %}
+  <div id="fileTable" style="margin-top: 30px;">
+    <table class="my-table">
+      <thead>
+      <tr>
+        <th colspan="3" class="text-left my-table-title"><i class="my-table-logo"></i>上传文件列表</th>
+        <th colspan="4" class="text-right my-table-title-btn">
+          <div class="dropdown">
+            <button style="border: none" class="my-handle-btn my-handle-btn-danger dropdown-toggle" type="button"
+                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              高级操作
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="{% url 'mysql_tools:mysql_file_upload_del' 0 %}">清空所有数据</a> <a
+                    class="dropdown-item" href="{% url 'mysql_tools:mysql_file_upload_list' %}">刷新数据</a>
+            </div>
+          </div>
+        </th>
+      </tr>
+      <tr>
+        <th class="text-center">#</th>
+        <th class="text-center">项目名称</th>
+        <th class="text-center">文件名称</th>
+        <th class="text-center">大小（兆）</th>
+        <th class="text-center">处理时间（秒）</th>
+        <th class="text-center">用户操作</th>
+        <th class="text-center">数据预览</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% if uploadFile_list %}
+        {% for uploadFile in uploadFile_list %}
+          <tr>
+            <td class="text-center">{{ forloop.counter }}</td>
+            <td>{{ uploadFile.project.name }}</td>
+            <td>{{ uploadFile.filename }}</td>
+            <td class="text-center">{{ uploadFile.filesize }}</td>
+            <td class="text-center">{{ uploadFile.handle_time }}</td>
+            <td class="text-center">
+              <a href="{% url 'mysql_tools:mysql_file_upload_del' uploadFile.id %}"
+                 class="my-handle-btn my-handle-btn-danger">删除数据</a>
+            </td>
+            <td class="text-center">
+              {% if uploadFile.sql_status == 0 %}
+                <span class="my-handle-btn my-handle-btn-danger">SQL处理失败</span>
+              {% elif uploadFile.sql_status == 1 %}
+                <span class="my-handle-btn my-handle-btn-info">SQL处理中</span>
+              {% else %}
+                <a href="{% url 'mysql_tools:mysql_file_upload_detail' uploadFile.id %}"
+                   class="my-handle-btn">查看SQL详情</a>
+              {% endif %}
+
+              {% if uploadFile.table_status == 0 %}
+                <span class="my-handle-btn my-handle-btn-danger">表统计失败</span>
+              {% elif uploadFile.table_status == 1 %}
+                <span class="my-handle-btn my-handle-btn-info">表统计处理中</span>
+              {% else %}
+                <a href="{% url 'mysql_tools:mysql_file_upload_table' uploadFile.id %}"
+                   class="my-handle-btn">查看表查询统计</a>
+              {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+      {% else %}
+        <tr>
+          <td colspan="7" class="text-center">暂无数据</td>
+        </tr>
+      {% endif %}
+      </tbody>
+    </table>
+    <br> <small class="form-text text-muted text-right">MySQL Slow log 的结果分析记录不建议保留太多历史记录.</small>
+  </div>
+{% endblock main-content %}

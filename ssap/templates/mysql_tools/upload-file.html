@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  文件上传
+{% endblock title %}
+
+{% block main-content %}
+  <div id="uploadForm">
+    <form action="{% url 'mysql_tools:mysql_file_upload' %}" enctype="multipart/form-data" method="post">
+      <div class="form-group">
+        <label class="my-input-title">日志类型：</label>
+        <div class="form-group">
+          <select class="form-control" name="fileType" id="id_fileType">
+            <option value="1">MySQL</option>
+          </select> <small class="form-text text-muted">当前服务版本只支持 MySQL slow log 的结果分析.</small>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="my-input-title">所属项目：</label>
+        <div class="form-group">
+          <select class="form-control" name="project" id="id_project">
+            {% for project in project_list %}
+              <option value="{{ project.id }}">{{project.name}}</option>
+            {% endfor %}
+          </select> <small class="form-text text-muted">项目的意义在于解决公司多个业务一个平台查看的问题，可以在<a href="/admin" target="_blank">后台</a>添加!</small>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="my-input-title">文件上传：</label> <input type="file" class="form-control my-input-file"
+                                                           name="uploadFile" id="id_uploadFile"> <small
+              class="form-text text-muted">请确保你所上传的文件是 MySQL 的 Slow log 且文件大小最好不超过 50M.</small>
+      </div>
+      <button type="submit" class="btn btn-dark btn-block">点击确认上传，分析将花费一定时间...</button>
+    </form>
+  </div>
+{% endblock main-content %}

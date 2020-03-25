@@ -1,0 +1,173 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  SQL详情
+{% endblock title %}
+
+{% block main-content %}
+  <div id="fileTable" style="margin-top: 30px;">
+    <table class="my-table">
+      <thead>
+      <tr>
+        <th colspan="4" class="text-left my-table-title"><i
+                class="my-table-logo"></i>文件分析结果（{{ record_nums }}条）：{{ sqlFile.filename }}
+        </th>
+        <th colspan="4" class="text-right my-table-title-btn">
+          <div class="dropdown">
+            <button style="border: none" class="my-handle-btn my-handle-btn-danger dropdown-toggle" type="button"
+                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              高级操作
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="{% url 'mysql_tools:mysql_file_upload_detail' sqlFile.id %}">刷新数据</a>
+            </div>
+          </div>
+        </th>
+      </tr>
+      <tr class="my-table-chose my-table-select">
+        <td><span>筛选条件</span></td>
+        <td colspan="7">
+          <select onchange="location.href=this.options[this.selectedIndex].value;">
+            <option value="http://{{ server_name }}{% url 'mysql_tools:mysql_file_upload_detail' sqlFile.id %}">
+              --- 选择用户 ---
+            </option>
+            {% for user in user_list %}
+              <option value="http://{{ server_name }}{% url 'mysql_tools:mysql_file_upload_detail' sqlFile.id %}?exec_user={{ user }}"
+                      {% if exec_user_value == user %}selected{% endif %}>{{ user }}</option>
+            {% endfor %}
+          </select>
+
+          <select onchange="location.href=this.options[this.selectedIndex].value;">
+            <option value="http://{{ server_name }}{% url 'mysql_tools:mysql_file_upload_detail' sqlFile.id %}">
+              --- 选择数据库 ---
+            </option>
+            {% for db in db_list %}
+              <option value="http://{{ server_name }}{% url 'mysql_tools:mysql_file_upload_detail' sqlFile.id %}?exec_db={{ db }}"
+                      {% if exec_db_value == db %}selected{% endif %}>{{ db }}</option>
+            {% endfor %}
+          </select>
+
+          <select onchange="location.href=this.options[this.selectedIndex].value;">
+            <option value="http://{{ server_name }}{% url 'mysql_tools:mysql_file_upload_detail' sqlFile.id %}">
+              --- 选择耗时 ---
+            </option>
+            <option value="http://{{ server_name }}{% url 'mysql_tools:mysql_file_upload_detail' sqlFile.id %}?exec_use_time=5"
+                    {% if exec_use_time_value == 5 %}selected{% endif %}>
+              大于5秒
+            </option>
+            <option value="http://{{ server_name }}{% url 'mysql_tools:mysql_file_upload_detail' sqlFile.id %}?exec_use_time=10"
+                    {% if exec_use_time_value == 10 %}selected{% endif %}>
+              大于10秒
+            </option>
+            <option value="http://{{ server_name }}{% url 'mysql_tools:mysql_file_upload_detail' sqlFile.id %}?exec_use_time=20"
+                    {% if exec_use_time_value == 20 %}selected{% endif %}>
+              大于20秒
+            </option>
+            <option value="http://{{ server_name }}{% url 'mysql_tools:mysql_file_upload_detail' sqlFile.id %}?exec_use_time=100"
+                    {% if exec_use_time_value == 100 %}selected{% endif %}>
+              大于100秒
+            </option>
+          </select>
+        </td>
+      </tr>
+      <tr class="my-table-chose my-table-sort">
+        <td><span>排序规则</span></td>
+        <td colspan="7">
+          <a class="{% if sort_rule_value == 'exec_user' %}my-handle-btn-danger{% endif %}" href="?sort_rule=exec_user">按用户</a>
+          / <a class="{% if sort_rule_value == 'exec_db' %}my-handle-btn-danger{% endif %}" href="?sort_rule=exec_db">按数据库</a>
+          / <a class="{% if sort_rule_value == 'exec_use_time_up' %}my-handle-btn-danger{% endif %}"
+               href="?sort_rule=exec_use_time_up">按耗时 - 升序</a> / <a
+                class="{% if sort_rule_value == 'exec_use_time_down' %}my-handle-btn-danger{% endif %}"
+                href="?sort_rule=exec_use_time_down">按耗时 - 降序</a> / <a
+                class="{% if sort_rule_value == 'exec_rows_examined_up' %}my-handle-btn-danger{% endif %}"
+                href="?sort_rule=exec_rows_examined_up">按扫描行数 - 升序</a> / <a
+                class="{% if sort_rule_value == 'exec_rows_examined_down' %}my-handle-btn-danger{% endif %}"
+                href="?sort_rule=exec_rows_examined_down">按扫描行数 - 降序</a>
+        </td>
+      </tr>
+      <tr>
+        <th class="text-center">#</th>
+        <th class="text-center">执行用户</th>
+        <th class="text-center">操作数据库</th>
+        <th class="text-center">操作时间</th>
+        <th class="text-center">执行耗时（秒）</th>
+        <th class="text-center">扫描行数</th>
+        <th class="text-center">返回行数</th>
+        <th class="text-center">用户操作</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% if sqlDetail_list %}
+        {% for sqlDetail in sqlDetail_list.object_list %}
+          <tr>
+            <td class="text-center">{{ forloop.counter }}</td>
+            <td class="text-center">{{ sqlDetail.exec_user }}</td>
+            <td class="text-center">{{ sqlDetail.exec_db }}</td>
+            <td class="text-center">{{ sqlDetail.exec_time }}</td>
+            <td class="text-center">{{ sqlDetail.exec_use_time }}</td>
+            <td class="text-center">{{ sqlDetail.exec_rows_examined }}</td>
+            <td class="text-center">{{ sqlDetail.exec_rows_sent }}</td>
+            <td class="text-center">
+              <a class="my-handle-btn" data-toggle="collapse" href="#id_sqlDetail_{{ sqlDetail.id }}" role="button"
+                 aria-expanded="false" aria-controls="collapseExample"> 点击查看完整SQL </a>
+            </td>
+          </tr>
+          <tr class="my-table-detail">
+            <td colspan="8">
+              <div class="collapse" id="id_sqlDetail_{{ sqlDetail.id }}">
+                <div class="card card-body">
+                  {{ sqlDetail.exec_sql }}
+                </div>
+              </div>
+            </td>
+          </tr>
+        {% endfor %}
+      {% else %}
+        <tr>
+          <td colspan="8" class="text-center">暂无数据!</td>
+        </tr>
+      {% endif %}
+      </tbody>
+    </table>
+    <br> <small class="form-text text-muted text-right">MySQL Slow log 的结果分析记录不建议保留太多历史记录.</small>
+    <nav aria-label="...">
+      <ul class="pagination">
+        <!-- 上一页 -->
+        {% if sqlDetail_list.has_previous %}
+          <li class="page-item">
+            <a class="page-link" href="?{{ sqlDetail_list.previous_page_number.querystring }}">上一页</a>
+          </li>
+        {% endif %}
+
+        <!-- 页码 -->
+        {% for page in sqlDetail_list.pages %}
+          {% if page %}
+            <!-- 当前页 -->
+            {% ifequal page sqlDetail_list.number %}
+              <li class="page-item active">
+                <a class="page-link" href="?{{ page.querystring }}">{{ page }}</a>
+              </li>
+              <!-- 其它页 -->
+            {% else %}
+              <li class="page-item">
+                <a class="page-link" href="?{{ page.querystring }}">{{ page }}</a>
+              </li>
+            {% endifequal %}
+            <!-- 省略页 -->
+          {% else %}
+            <li class="page-item">
+              <a class="page-link" href="">...</a>
+            </li>
+          {% endif %}
+        {% endfor %}
+
+        <!-- 下一页 -->
+        {% if sqlDetail_list.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="?{{ sqlDetail_list.next_page_number.querystring }}">下一页</a>
+          </li>
+        {% endif %}
+      </ul>
+    </nav>
+  </div>
+{% endblock main-content %}

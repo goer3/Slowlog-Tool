@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  数据被查询详情
+{% endblock title %}
+
+{% block main-content %}
+  <div id="fileTable" style="margin-top: 30px;">
+    <table class="my-table">
+      <thead>
+      <tr>
+        <th colspan="2" class="text-left my-table-title"><i class="my-table-logo"></i>查询文件：{{ sqlFile.filename }}
+        </th>
+        <th colspan="1" class="text-right my-table-title-btn">
+          <div class="dropdown">
+            <button style="border: none" class="my-handle-btn my-handle-btn-danger dropdown-toggle" type="button"
+                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              高级操作
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="{% url 'mysql_tools:mysql_file_upload_table' sqlFile.id %}">刷新数据</a>
+            </div>
+          </div>
+        </th>
+      </tr>
+      <tr>
+        <th class="text-center">#</th>
+        <th class="text-center">被查询的数据表</th>
+        <th class="text-center">查询次数</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for table in table_list %}
+        <tr>
+          <td class="text-center">{{ forloop.counter }}</td>
+          <td>{{ table.table_name }}</td>
+          <td class="text-center">{{ table.select_times }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    <br> <small class="form-text text-muted text-right">MySQL Slow log 的结果分析记录不建议保留太多历史记录.</small>
+  </div>
+
+{% endblock main-content %}

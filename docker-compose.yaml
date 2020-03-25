@@ -1,0 +1,30 @@
+version: "3"
+
+services:
+  # django service
+  ssap:
+    build:
+      context: .
+      dockerfile: ./docker/ssap/Dockerfile
+    container_name: ssap
+    networks:
+      - ssap-network
+
+  # nginx service
+  ssap-nginx:
+    build:
+      context: .
+      dockerfile: ./docker/nginx/Dockerfile
+    container_name: ssap-nginx
+    depends_on:
+      - ssap
+    links:
+      - ssap
+    ports:
+      - 10000:10000
+    networks:
+      - ssap-network
+
+networks:
+  ssap-network:
+    driver: bridge
