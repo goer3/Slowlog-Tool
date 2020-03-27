@@ -136,7 +136,7 @@ def MysqlUploadFileSQLHandle(Filename):
                 # 操作数据库
                 re_exec_db = re.compile(r'# Schema:\s*([a-zA-Z0-9_]+)\s*Last_errno', re.I)
                 # 当数据是 root 用户直接授权所有权限的时候，日志里面是没有数据库标识的
-                if len(re_exec_db.findall(data_str)[0]):
+                if len(re_exec_db.findall(data_str)):
                     exec_db = re_exec_db.findall(data_str)[0]
                 else:
                     exec_db = "None"
