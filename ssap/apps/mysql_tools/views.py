@@ -127,7 +127,7 @@ def MysqlUploadFileSQLHandle(Filename):
                 # 执行时间
                 re_exec_time = re.compile(r'# Time: ([0-9A-Z:\-]+)\.', re.I)
                 exec_time = re_exec_time.findall(data_str)[0]
-                exec_time = exec_time.replace('T1', ' ')
+                exec_time = exec_time.replace('T', ' ')
 
                 # 执行用户
                 re_exec_user = re.compile(r'# User@Host:\s*([a-zA-Z0-9_]+)\[', re.I)
