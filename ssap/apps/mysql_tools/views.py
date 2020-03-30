@@ -258,10 +258,8 @@ class MySQLFileSqlDetailView(View):
         exec_use_time_value = ''
         sort_rule_value = ''
 
-        print(1)
         # 查询数据
         if file_id.isalnum():
-            print(2)
             # 文件
             sqlFile = models.MysqlUploadFile.objects.get(id=int(file_id))
 
@@ -273,17 +271,17 @@ class MySQLFileSqlDetailView(View):
             db_list = sqlDetail_list.values_list('exec_db', flat=True).distinct()
 
             # 判断是否按照用户筛选
-            if request.GET.get('exec_user'):
+            if (request.GET.get('exec_user') != '') and (request.GET.get('exec_user')):
                 exec_user_value = request.GET.get('exec_user')
                 sqlDetail_list = sqlDetail_list.filter(exec_user=exec_user_value)
 
             # 判断是否按照数据库筛选
-            if request.GET.get('exec_db'):
+            if (request.GET.get('exec_db') != '') and (request.GET.get('exec_db')):
                 exec_db_value = request.GET.get('exec_db')
                 sqlDetail_list = sqlDetail_list.filter(exec_db=exec_db_value)
 
             # 判断是否按照时间筛选
-            if request.GET.get('exec_use_time'):
+            if (request.GET.get('exec_use_time') != '') and (request.GET.get('exec_use_time')):
                 exec_use_time_value = int(request.GET.get('exec_use_time'))
                 sqlDetail_list = sqlDetail_list.filter(exec_use_time__gt=exec_use_time_value)
 
@@ -314,7 +312,6 @@ class MySQLFileSqlDetailView(View):
                 if sort_rule_value == 'exec_rows_examined_down':
                     sqlDetail_list = sqlDetail_list.order_by('-exec_rows_examined')
 
-            print(3)
             # 记录数量
             record_nums = sqlDetail_list.count()
 

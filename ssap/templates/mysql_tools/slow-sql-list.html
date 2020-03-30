@@ -73,16 +73,16 @@
       <tr class="my-table-chose my-table-sort">
         <td><span>排序规则</span></td>
         <td colspan="7">
-          <a class="{% if sort_rule_value == 'exec_user' %}my-handle-btn-danger{% endif %}" href="?sort_rule=exec_user">按用户</a>
-          / <a class="{% if sort_rule_value == 'exec_db' %}my-handle-btn-danger{% endif %}" href="?sort_rule=exec_db">按数据库</a>
+          <a class="{% if sort_rule_value == 'exec_user' %}my-handle-btn-danger{% endif %}" href="?exec_user={{ exec_user_value }}&exec_db={{ exec_db_value }}&exec_use_time={{ exec_use_time_value }}&sort_rule=exec_user">按用户</a>
+          / <a class="{% if sort_rule_value == 'exec_db' %}my-handle-btn-danger{% endif %}" href="?exec_user={{ exec_user_value }}&exec_db={{ exec_db_value }}&exec_use_time={{ exec_use_time_value }}&sort_rule=exec_db">按数据库</a>
           / <a class="{% if sort_rule_value == 'exec_use_time_up' %}my-handle-btn-danger{% endif %}"
-               href="?sort_rule=exec_use_time_up">按耗时 - 升序</a> / <a
+               href="?exec_user={{ exec_user_value }}&exec_db={{ exec_db_value }}&exec_use_time={{ exec_use_time_value }}&sort_rule=exec_use_time_up">按耗时 - 升序</a> / <a
                 class="{% if sort_rule_value == 'exec_use_time_down' %}my-handle-btn-danger{% endif %}"
-                href="?sort_rule=exec_use_time_down">按耗时 - 降序</a> / <a
+                href="?exec_user={{ exec_user_value }}&exec_db={{ exec_db_value }}&exec_use_time={{ exec_use_time_value }}&sort_rule=exec_use_time_down">按耗时 - 降序</a> / <a
                 class="{% if sort_rule_value == 'exec_rows_examined_up' %}my-handle-btn-danger{% endif %}"
-                href="?sort_rule=exec_rows_examined_up">按扫描行数 - 升序</a> / <a
+                href="?exec_user={{ exec_user_value }}&exec_db={{ exec_db_value }}&exec_use_time={{ exec_use_time_value }}&sort_rule=exec_rows_examined_up">按扫描行数 - 升序</a> / <a
                 class="{% if sort_rule_value == 'exec_rows_examined_down' %}my-handle-btn-danger{% endif %}"
-                href="?sort_rule=exec_rows_examined_down">按扫描行数 - 降序</a>
+                href="?exec_user={{ exec_user_value }}&exec_db={{ exec_db_value }}&exec_use_time={{ exec_use_time_value }}&sort_rule=exec_rows_examined_down">按扫描行数 - 降序</a>
         </td>
       </tr>
       <tr>
